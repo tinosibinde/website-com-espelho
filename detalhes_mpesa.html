@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes de Pagamento M-Pesa - MozBoostᴛᴘs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos copiados/adaptados da secção #pagamento */
+    #detalhes {
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 12px;
+        margin-top: 40px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px #00bfff80;
+    }
+    #detalhes h2 {
+        color: #00bfff;
+        border-bottom: 2px solid #00bfff;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+    }
+    #info-metodo {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 25px;
+        padding: 10px;
+        background: #007bff;
+        border-radius: 6px;
+    }
+    .form-detalhes {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    input[type="text"], input[type="tel"], input[type="email"] {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #007bff;
+        background: #2c2c2c;
+        color: white;
+        font-size: 1rem;
+    }
+    button#finalizar-pagamento {
+        background: #00bfff;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+    button#finalizar-pagamento:hover {
+        background: #00aaff;
+        transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    
+        <h1>MozBoostᴛᴘs</h1>
+    </div>
+    <p>Detalhes para Pagamento M-Pesa</p>
+  </header>
+
+  <main>
+    <section id="detalhes">
+      <h2>Dados para processar sua subscrição via M-Pesa</h2>
+      <p id="info-metodo">A carregar...</p>
+
+      <div class="form-detalhes">
+        <input type="text" id="nome" placeholder="Nome Completo" required />
+        <input type="tel" id="contacto_emola_mpesa" placeholder="Seu Número M-Pesa (com saldo) - Ex: 84XXXXXXX" required />
+        <input type="tel" id="contacto_whatsapp" placeholder="Número de WhatsApp (para contacto rápido)" required />
+        <input type="email" id="email" placeholder="Endereço de E-mail" required />
+        <button id="finalizar-pagamento">Finalizar Pedido e Receber Instruções M-Pesa</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MozBoostᴛᴘs — Feito em Moçambique 🇲🇿</p>
+  </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const infoMetodo = document.getElementById("info-metodo");
+    const finalizarBtn = document.getElementById("finalizar-pagamento");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const servico = urlParams.get('servico');
+    const metodoDisplay = 'M-Pesa'; // ESPECÍFICO DESTA PÁGINA
+
+    if (servico) {
+        infoMetodo.innerHTML = `Serviço: ${decodeURIComponent(servico)} | Método: ${metodoDisplay.toUpperCase()}`;
+    } else {
+        infoMetodo.textContent = "Erro de carregamento.";
+        finalizarBtn.disabled = true;
+    }
+
+    finalizarBtn.addEventListener("click", () => {
+        const nome = document.getElementById("nome").value.trim();
+        const contactoMetodo = document.getElementById("contacto_emola_mpesa").value.trim();
+        const contactoWhatsapp = document.getElementById("contacto_whatsapp").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        if (!nome || !contactoMetodo || !contactoWhatsapp || !email) {
+            alert("⚠️ Por favor, preencha todos os campos.");
+            return;
+        }
+
+        // --- SIMULAÇÃO DE ENVIO AUTOMÁTICO E INSTANTÂNEO ---
+        finalizarBtn.disabled = true;
+        finalizarBtn.textContent = "✅ Detalhes Enviados! Verifique seu Email e WhatsApp...";
+
+        // Dados fictícios da conta de destino para enviar ao cliente:
+        const NOME_CONTA = "MozBoost Pagamentos";
+        const NUMERO_MPESA = "85 999 0000"; // Exemplo de número de destino
+
+        setTimeout(() => {
+            alert(`🎉 INSTRUÇÕES ENVIADAS AUTOMÁTICA
+Detalhes do Pedido: ${decodeURIComponent(servico)} via M-Pesa.
+
+1. 📩 Email (${email}): Enviado com os detalhes completos da transferência (Nome: ${NOME_CONTA}, Número M-Pesa: ${NUMERO_MPESA}) e o valor a transferir.
+2. 📲 WhatsApp (${contactoWhatsapp}): Receberá uma mensagem de confirmação do pedido instantaneamente.
+
+Obrigado, ${nome}. Por favor, complete a transferência para o número ${NUMERO_MPESA}.`);
+            
+            window.location.href = "index.html";
+        }, 1500);
+    });
+});
+</script>
+</body>
+</html>

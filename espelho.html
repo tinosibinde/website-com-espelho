@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Espelho com Filtros e Foto - MozBoost^tps</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    background: radial-gradient(circle at center, #1c1c1c 0%, #000 100%);
+    color: #f0f0f0;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 14px;
+    overflow: hidden;
+  }
+  h1 {
+    margin-bottom: 4px;
+    text-shadow: 0 0 10px #00d4ff;
+  }
+  video {
+    width: 80vw;
+    max-width: 600px;
+    border-radius: 14px;
+    border: 3px solid #00d4ff;
+    background: #000;
+    transform: scaleX(-1);
+    transition: filter 0.3s ease;
+  }
+  canvas { display: none; }
+  .botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  button, select {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #00d4ff;
+    color: black;
+    transition: 0.3s;
+  }
+  button:hover, select:hover {
+    background-color: #00aaff;
+  }
+</style>
+</head>
+<body>
+  <h1>Espelho com Câmara 🪞</h1>
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas"></canvas>
+
+  <div class="botoes">
+    <button id="iniciar">🎥 Iniciar Câmara</button>
+    <button id="parar">🛑 Parar</button>
+    <button id="foto">📸 Tirar Foto</button>
+    <select id="filtro">
+      <option value="none">Sem filtro</option>
+      <option value="grayscale(100%)">Preto e branco</option>
+      <option value="sepia(80%)">Sépia</option>
+      <option value="contrast(150%) brightness(120%)">Beleza+</option>
+      <option value="blur(2px)">Suave</option>
+    </select>
+  </div>
+
+<script>
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const iniciar = document.getElementById('iniciar');
+const parar = document.getElementById('parar');
+const foto = document.getElementById('foto');
+const filtro = document.getElementById('filtro');
+let stream = null;
+
+// Iniciar câmara
+iniciar.addEventListener('click', async () => {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+    video.srcObject = stream;
+  } catch (e) {
+    alert("Erro ao aceder à câmara: " + e.message);
+  }
+});
+
+// Parar câmara
+parar.addEventListener('click', () => {
+  if (stream) {
+    stream.getTracks().forEach(t => t.stop());
+    video.srcObject = null;
+    stream = null;
+  }
+});
+
+// Aplicar filtros
+filtro.addEventListener('change', () => video.style.filter = filtro.value);
+
+// Tirar foto
+foto.addEventListener('click', () => {
+  if (!stream) return alert("Inicie a câmara primeiro!");
+  const ctx = canvas.getContext('2d');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  ctx.translate(canvas.width, 0);
+  ctx.scale(-1, 1);
+  ctx.filter = filtro.value;
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  const link = document.createElement('a');
+  link.download = 'espelho-foto.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+</script>
+</body>
+</html>

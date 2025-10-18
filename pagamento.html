@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento Seguro - MozBoostᴛᴘs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos específicos para a página de pagamento */
+    #pagamento {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px #00bfff80;
+    }
+    #pagamento h2 {
+      color: #00bfff;
+      border-bottom: 2px solid #00bfff;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+    #servico-selecionado {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 25px;
+      padding: 10px;
+      background: #007bff;
+      border-radius: 6px;
+    }
+    
+    /* MELHORIA: Estilizando os métodos de pagamento como cartões clicáveis */
+    .pagamentos {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .metodo-card {
+        background: #222;
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+        border: 2px solid #333;
+    }
+    .metodo-card:hover {
+        background: #2c2c2c;
+        border-color: #007bff;
+    }
+    .metodo-card input[type="radio"] {
+        /* Oculta o rádio nativo e usa CSS para o visual */
+        display: none;
+    }
+    /* Estilo para a opção selecionada */
+    .metodo-card.selected {
+        background: #0d1e2e; /* Fundo mais escuro */
+        border-color: #00bfff;
+        box-shadow: 0 0 10px #00bfff50;
+    }
+    .metodo-card span {
+        font-weight: 500;
+        margin-left: 10px;
+        color: #ddd;
+    }
+
+    /* Estilo dos inputs e botão */
+    .form-detalhes {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    input[type="text"], input[type="tel"] {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #007bff;
+        background: #2c2c2c;
+        color: white;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input[type="text"]:focus, input[type="tel"]:focus {
+        border-color: #00bfff;
+        box-shadow: 0 0 8px #00bfff50;
+        outline: none;
+    }
+    
+    button#confirmar-pagamento {
+        background: #00bfff;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        border: none;
+    }
+    button#confirmar-pagamento:hover {
+        background: #00aaff;
+        transform: translateY(-2px);
+    }
+    button#confirmar-pagamento:disabled {
+        background: #555;
+        cursor: not-allowed;
+        transform: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MozBoostᴛᴘs</h1>
+    <p>Pagamento Seguro e Rápido</p>
+  </header>
+
+  <main>
+    <section id="pagamento">
+      <h2>1. Escolha o Método de Pagamento</h2>
+      <p id="servico-selecionado">A carregar o serviço...</p>
+
+      <div class="pagamentos">
+        <div class="metodo-card" data-value="cartao">
+            <input type="radio" name="pagamento" id="radio-cartao" value="cartao" />
+            <span>Cartão Bancário / Débito <small style="color: #5eff5e;">(Pagamento Instantâneo)</small></span>
+        </div>
+        
+        <div class="metodo-card" data-value="emola">
+            <input type="radio" name="pagamento" id="radio-emola" value="emola" />
+            <span>eMola</span>
+        </div>
+        
+        <div class="metodo-card" data-value="mpesa">
+            <input type="radio" name="pagamento" id="radio-mpesa" value="mpesa" />
+            <span>M-Pesa</span>
+        </div>
+      </div>
+
+      <h2>2. Confirme o Método</h2>
+      <div class="form-detalhes">
+        <button id="confirmar-pagamento" disabled>Continuar para o Pagamento</button>
+      </div>
+    </section>
+    
+    <p style="text-align: center; margin-top: 20px;"><a href="index.html" style="color: #007bff; text-decoration: none;">&#x2190; Voltar aos Planos</a></p>
+  </main>
+
+  <footer>
+    <p>© 2025 MozBoostᴛᴘs — Feito em Moçambique 🇲🇿</p>
+  </footer>
+
+  <script defer src="pagamento.js"></script>
+</body>
+</html>

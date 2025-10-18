@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MozBoostᴛᴘs - Subscrições Premium</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+        <img src="logo_mozboost.png" alt="Logo MozBoost" class="site-logo">
+        <h1>MOZBOOST<sup>tps</sup></h1>
+    </div>
+    <p class="tagline">Sua Conexão Profissional</p>
+    <p class="servicos">Subscrições Netflix • Prime Video • Spotify</p>
+    <p class="slogan">O melhor do entretenimento com preços Moçambicanos.</p>
+  </header>
+
+  <main>
+    <section id="planos">
+      <h2>Planos Disponíveis</h2>
+      <div class="cards-container">
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
+          <h3>Netflix Premium</h3>
+          <p>4 ecrãs + Ultra HD. Melhor qualidade de imagem e som.</p>
+          <div class="precos">
+            <span class="mt">350 MZN</span>
+            <span class="usd">Preço de Mercado: $25</span>
+          </div>
+          <button class="btn-comprar" data-servico="Netflix Premium">Comprar Agora</button>
+        </div>
+
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png" alt="Prime Video" />
+          <h3>Prime Video</h3>
+          <p>Acesso completo aos Originais Amazon. Baixa latência.</p>
+          <div class="precos">
+            <span class="mt">250 MZN</span>
+            <span class="usd">Preço de Mercado: $15</span>
+          </div>
+          <button class="btn-comprar" data-servico="Prime Video">Comprar Agora</button>
+        </div>
+
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify" />
+          <h3>Spotify Premium</h3>
+          <p>Música ilimitada, sem anúncios e com downloads offline.</p>
+          <div class="precos">
+            <span class="mt">150 MZN</span>
+            <span class="usd">Preço de Mercado: $10</span>
+          </div>
+          <button class="btn-comprar" data-servico="Spotify Premium">Comprar Agora</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MozBoostᴛᴘs — Feito em Moçambique 🇲🇿</p>
+  </footer>
+
+  <a href="espelho.html" class="espelho-btn" target="_blank">🪞 Espelho</a>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const botoes = document.querySelectorAll(".btn-comprar");
+
+    botoes.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const servico = btn.dataset.servico;
+            // Redireciona para a página de pagamento separada, passando o serviço como parâmetro
+            window.location.href = `pagamento.html?servico=${encodeURIComponent(servico)}`;
+        });
+    });
+});
+</script>
+</body>
+</html>

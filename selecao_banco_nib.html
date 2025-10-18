@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIB - Seleção de Banco - MozBoostᴛᴘs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #selecao-banco {
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 12px;
+        margin-top: 40px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px #00bfff80;
+    }
+    #selecao-banco h2 {
+        color: #00bfff;
+        border-bottom: 2px solid #00bfff;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+    }
+    #info-servico {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 25px;
+        padding: 10px;
+        background: #007bff;
+        border-radius: 6px;
+    }
+    .bancos-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    .banco-card {
+        background: #222;
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 2px solid #333;
+        transition: border-color 0.3s, background 0.3s;
+        text-align: center;
+        font-weight: bold;
+        color: #ddd;
+    }
+    .banco-card:hover {
+        background: #2c2c2c;
+        border-color: #007bff;
+    }
+    .banco-card.selected {
+        border-color: #00bfff;
+        background: #0d1e2e;
+        box-shadow: 0 0 10px #00bfff50;
+    }
+    button#continuar-banco {
+        background: #00bfff;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        width: 100%;
+    }
+    button#continuar-banco:disabled {
+        background: #555;
+        cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MozBoostᴛᴘs</h1>
+    <p>Transferência Bancária (NIB)</p>
+  </header>
+
+  <main>
+    <section id="selecao-banco">
+      <h2>Selecione o seu Banco</h2>
+      <p id="info-servico">A carregar...</p>
+
+      <div class="bancos-container">
+        <div class="banco-card" data-banco="BCI">BCI</div>
+        <div class="banco-card" data-banco="MILLENNIUM_BIM">MILLENNIUM BIM</div>
+        <div class="banco-card" data-banco="STANDARD_BANK">STANDARD BANK</div>
+      </div>
+      
+      <button id="continuar-banco" disabled>Continuar</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MozBoostᴛᴘs — Feito em Moçambique 🇲🇿</p>
+  </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const infoServico = document.getElementById("info-servico");
+    const continuarBtn = document.getElementById("continuar-banco");
+    const bancoCards = document.querySelectorAll(".banco-card");
+    let bancoSelecionado = null;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const servico = urlParams.get('servico');
+
+    if (servico) {
+        infoServico.textContent = `Serviço: ${servico}`;
+    } else {
+        infoServico.textContent = "Erro de carregamento.";
+    }
+
+    bancoCards.forEach(card => {
+        card.addEventListener("click", () => {
+            bancoCards.forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+            bancoSelecionado = card.dataset.banco;
+            continuarBtn.disabled = false;
+        });
+    });
+
+    continuarBtn.addEventListener("click", () => {
+        if (!bancoSelecionado) {
+            alert("Selecione um banco.");
+            return;
+        }
+
+        // Redireciona para a página de detalhes NIB com o banco
+        window.location.href = `detalhes_nib.html?servico=${encodeURIComponent(servico)}&banco=${bancoSelecionado}`;
+    });
+});
+</script>
+</body>
+</html>

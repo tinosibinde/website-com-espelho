@@ -1,0 +1,45 @@
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const servico = urlParams.get('servico');
+        const banco = urlParams.get('banco');
+        const finalizarBtn = document.getElementById("finalizar-nib");
+    
+        const servicoNome = document.getElementById('servico-nome');
+        const bancoNome = document.getElementById('banco-nome');
+        const nibValor = document.getElementById('nib-valor');
+    
+        // Mapeamento simulado de NIB (Mantido)
+        const nibs = {
+            BCI: "0008 0000 0000 1234 567 89",
+            MILLENNIUM_BIM: "0001 0000 0000 9876 543 21",
+            STANDARD_BANK: "0005 0000 0000 1122 334 45"
+        };
+    
+        if (servico && banco && nibs[banco]) {
+            servicoNome.textContent = servico;
+            bancoNome.textContent = banco.replace('_', ' ');
+            nibValor.textContent = nibs[banco];
+        } else {
+            alert("Erro ao carregar detalhes do pagamento.");
+            finalizarBtn.disabled = true;
+        }
+    
+        // Ação do botão atualizada: Redirecionar para o formulário de comprovativo
+        finalizarBtn.addEventListener("click", () => {
+            const nome = document.getElementById("nome").value.trim();
+            const contacto = document.getElementById("contacto_tel").value.trim();
+    
+            if (!nome || !contacto) {
+                alert("Por favor, preencha o seu nome e número de contacto (WhatsApp).");
+                return;
+            }
+    
+            finalizarBtn.textContent = "A Redirecionar para o Comprovativo...";
+            finalizarBtn.disabled = true;
+    
+            // Redirecionamento para a página de comprovativo, passando todos os dados importantes.
+            window.location.href = `comprovativo_nib.html?servico=${encodeURIComponent(servico)}&banco=${banco}&nome=${encodeURIComponent(nome)}&contacto=${encodeURIComponent(contacto)}`;
+        });
+    });
+    </script>

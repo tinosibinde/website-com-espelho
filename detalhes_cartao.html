@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Depósito com Cartão - MozBoostᴛᴘs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos base */
+    #deposito-wrapper {
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 12px;
+        margin-top: 20px;
+        max-width: 900px; /* Layout mais largo */
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px #007bff80;
+    }
+    #deposito-container {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap; 
+        padding-top: 20px;
+    }
+    
+    .form-coluna {
+        flex: 2; /* Ocupa 2 partes */
+        min-width: 300px;
+    }
+    .info-coluna {
+        flex: 1; /* Ocupa 1 parte */
+        min-width: 250px;
+    }
+    
+    #deposito-wrapper h2 {
+        color: #007bff;
+        padding-bottom: 10px;
+        font-size: 1.8rem;
+    }
+    .divisor {
+        display: flex;
+        gap: 10px;
+    }
+    .divisor > * {
+        flex: 1;
+    }
+
+    /* Estilo dos Inputs */
+    input[type="text"], input[type="number"] {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc; /* Bordas mais claras */
+        background: #2c2c2c;
+        color: white;
+        font-size: 1rem;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Secção de Termos/FAQ (Direita) */
+    .termos h3 {
+        color: #ddd;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    .termos p {
+        margin-bottom: 10px;
+    }
+    .termos .destaque {
+        color: #5eff5e;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    }
+    .termos .destaque span {
+        margin-right: 8px;
+        font-size: 1.2em;
+    }
+
+    /* Botão de Pagamento */
+    button#pagar-cartao {
+        background: #00bfff;
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        width: 100%;
+        margin-top: 30px;
+        border: none;
+        color: #1a1a1a;
+        font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MozBoostᴛᴘs</h1>
+    <p>Depósito Seguro com Cartão Bancário</p>
+  </header>
+
+  <main>
+    <section id="deposito-wrapper">
+      <p style="color: #999; margin-bottom: 15px;"><a href="pagamento.html" style="color: #007bff; text-decoration: none;">&#x2190; Voltar</a></p>
+      <h2>Depósito</h2>
+
+      <div id="deposito-container">
+        
+        <div class="form-coluna">
+            
+            <p style="margin-bottom: 20px; color: #ccc;">Pagamento para o Serviço: <strong id="servico-nome">A carregar...</strong></p>
+            
+            <label style="display: block; color: #ccc; margin-bottom: 5px;">Número do cartão</label>
+            <input type="text" id="numero-cartao" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required />
+            
+            <label style="display: block; color: #ccc; margin-bottom: 5px;">Nome do titular do cartão</label>
+            <input type="text" id="nome-titular" placeholder="Digite o nome exatamente como está escrito no cartão" required />
+            
+            <div class="divisor">
+                <div>
+                    <label style="display: block; color: #ccc; margin-bottom: 5px;">Data de validade (MM/AA)</label>
+                    <input type="text" id="data-validade" placeholder="MM/AA" maxlength="5" required />
+                </div>
+                <div>
+                    <label style="display: block; color: #ccc; margin-bottom: 5px;">Código CVV/CVC</label>
+                    <input type="number" id="cvc-cvv" placeholder="CVC/CVV" maxlength="4" required />
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px; color: #ddd; border-bottom: 1px solid #333; padding-bottom: 10px;">Para a Conta</h3>
+            <p style="color: #00bfff; font-size: 1.1rem; margin-bottom: 20px;">
+                <span style="background: #007bff; padding: 3px 6px; border-radius: 4px; font-size: 0.9em;">MozBoostᴛᴘs</span> 
+                Investment Wallet (Moçambique)
+            </p>
+
+            <h3 style="margin-top: 30px; color: #ddd; border-bottom: 1px solid #333; padding-bottom: 10px;">Valor</h3>
+            <div class="divisor">
+                <input type="number" id="valor-pagar" placeholder="0.00" step="0.01" required />
+                <div class="divisor" style="max-width: 120px;">
+                    <button style="background: #007bff; color: white;">MZN</button>
+                    <button style="background: #555; color: white;">USD</button>
+                </div>
+            </div>
+            <p style="color: #999; font-size: 0.85rem; margin-top: -10px;">Valor Mínimo: 150 MZN</p>
+
+
+            <button id="pagar-cartao">Confirmar Pagamento</button>
+        </div>
+
+        <div class="info-coluna termos">
+            <h3>Termos</h3>
+            <p>Tempo médio de pagamento:Imediato</p>
+            <p>Comissão:0%</p>
+            
+            <div class="destaque">
+                <span>&#10003;</span> Todos os dados são criptografados antes de serem enviados ao nosso servidor
+            </div>
+            
+    
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MozBoostᴛᴘs — Feito em Moçambique 🇲🇿</p>
+  </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const servico = urlParams.get('servico');
+    const pagarBtn = document.getElementById("pagar-cartao");
+    const servicoNome = document.getElementById('servico-nome');
+
+    // Mapeamento do nome do serviço
+    if (servico) {
+        servicoNome.textContent = decodeURIComponent(servico);
+    } else {
+        servicoNome.textContent = "Erro: Serviço Desconhecido";
+        pagarBtn.disabled = true;
+    }
+
+    // Máscara para o número do cartão (XXXX XXXX XXXX XXXX)
+    const numeroCartaoInput = document.getElementById('numero-cartao');
+    numeroCartaoInput.addEventListener('input', (e) => {
+        const value = e.target.value.replace(/\D/g, '').slice(0, 16);
+        const formatted = value.match(/.{1,4}/g)?.join(' ') || '';
+        e.target.value = formatted;
+    });
+
+    // Máscara para a data de validade (MM/AA)
+    const dataValidadeInput = document.getElementById('data-validade');
+    dataValidadeInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '').slice(0, 4);
+        if (value.length > 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2);
+        }
+        e.target.value = value;
+    });
+
+    pagarBtn.addEventListener("click", () => {
+        // Coleta de Dados
+        const numeroCartao = numeroCartaoInput.value.trim();
+        const nomeTitular = document.getElementById("nome-titular").value.trim();
+        const dataValidade = dataValidadeInput.value.trim();
+        const cvvCvc = document.getElementById("cvc-cvv").value.trim();
+        const valorPagar = document.getElementById("valor-pagar").value.trim();
+        
+        // Simulação de validação básica (apenas para campos vazios)
+        if (!numeroCartao || !nomeTitular || !dataValidade || !cvvCvc || !valorPagar || valorPagar < 500) {
+            alert("⚠️ Por favor, preencha corretamente todos os campos do cartão. O valor mínimo é 500 MZN.");
+            return;
+        }
+
+        // --- SIMULAÇÃO DE PAGAMENTO INSTANTÂNEO ---
+        pagarBtn.disabled = true;
+        pagarBtn.textContent = "⌛ A Processar Pagamento Seguro...";
+
+        setTimeout(() => {
+            alert(`✅ PAGAMENTO PROCESSADO!
+O pagamento de ${valorPagar} MZN para o serviço ${decodeURIComponent(servico)} foi efetuado com sucesso (Cartão **** ${numeroCartao.slice(-4)}).
+O seu acesso será ativado instantaneamente. Obrigado!`);
+            
+            // Redireciona para a página inicial após o sucesso
+            window.location.href = "index.html";
+        }, 2500); // Simula um processamento de 2.5 segundos
+    });
+});
+</script>
+</body>
+</html>

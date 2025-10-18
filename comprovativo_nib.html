@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprovativo de Pagamento NIB - MozBoostᴛᴘs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos específicos para o layout do formulário de comprovativo */
+    #comprovativo-wrapper {
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 12px;
+        margin-top: 20px;
+        max-width: 900px; /* Mais largo para o layout de duas colunas */
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px #007bff80;
+    }
+    #comprovativo-container {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap; /* Permite quebrar em telas menores */
+    }
+    
+    .form-coluna {
+        flex: 3; /* Ocupa 3 partes */
+        min-width: 300px;
+    }
+    .info-coluna {
+        flex: 1; /* Ocupa 1 parte */
+        min-width: 200px;
+        background: #222;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 3px solid #00bfff;
+    }
+    
+    #comprovativo-wrapper h2 {
+        color: #007bff;
+        border-bottom: 2px solid #00bfff;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        font-size: 1.6rem;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+        padding: 15px;
+        border: 1px solid #333;
+        border-radius: 8px;
+    }
+    .form-group h3 {
+        color: #00bfff;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+    .form-detalhes {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    input[type="text"], input[type="number"], input[type="email"], input[type="date"], input[type="time"], select {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #007bff;
+        background: #2c2c2c;
+        color: white;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    /* Estilos da Coluna de Informação (Sidebar) */
+    .info-coluna h3 {
+        color: #fff;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 5px;
+    }
+    .info-coluna p, .info-coluna li {
+        color: #ccc;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    .info-coluna ul {
+        list-style: none;
+        padding: 0;
+    }
+    .info-coluna .seguranca {
+        color: #5eff5e;
+        font-weight: 600;
+        margin-top: 10px;
+        display: block;
+    }
+    
+    button#submeter-comprovativo {
+        background: #00bfff;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        width: 100%;
+        margin-top: 20px;
+        border: none;
+        color: #1a1a1a;
+        font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MozBoostᴛᴘs</h1>
+    <p>Comprovativo de Pagamento NIB</p>
+  </header>
+
+  <main>
+    <section id="comprovativo-wrapper">
+      <h2>Confirmação da Transação Bancária</h2>
+      
+      <div id="comprovativo-container">
+        
+        <div class="form-coluna">
+            <p style="color: #ccc; margin-bottom: 20px;">
+                Preencha os dados da transferência que **você fez** para acelerar a confirmação do seu pagamento.
+            </p>
+
+            <div class="form-group">
+                <h3>1. Dados do Pagador (Sua Conta)</h3>
+                <div class="form-detalhes">
+                    <input type="text" id="titular_pagador" placeholder="Nome do Titular da Conta que Pagou" required />
+                    <input type="email" id="email_pagador" placeholder="Seu E-mail (Para a fatura)" required />
+                    </div>
+            </div>
+            
+            <div class="form-group">
+                <h3>2. Informações da Transação Efetuada</h3>
+                <div class="form-detalhes">
+                    <input type="number" id="valor_pago" placeholder="Valor Exato Pago (Ex: 1500.00)" step="0.01" required />
+                    <select id="moeda_utilizada" required>
+                        <option value="">Moeda utilizada</option>
+                        <option value="MZN">MZN (Metical)</option>
+                        <option value="USD">USD (Dólar)</option>
+                        <option value="EUR">EUR (Euro)</option>
+                    </select>
+                    <input type="text" id="codigo_transacao" placeholder="Código/Referência da Transação" required />
+                    <input type="date" id="data_pagamento" required />
+                    <input type="time" id="hora_pagamento" required />
+                    <select id="metodo_utilizado" required>
+                        <option value="">Método de Pagamento Usado</option>
+                        <option value="Transferência NIB">Transferência NIB</option>
+                        <option value="Depósito">Depósito em Caixa/ATM</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3>3. Detalhes da Subscrição</h3>
+                <div class="form-detalhes">
+                    <input type="text" id="servico_final" readonly />
+                    <input type="text" id="periodo_assinatura" placeholder="Período da Assinatura (Ex: Mensal)" required />
+                </div>
+            </div>
+
+            <button id="submeter-comprovativo">Submeter Comprovativo e Concluir</button>
+        </div>
+
+        <div class="info-coluna">
+            <h3>Termos de Confirmação</h3>
+            <p>Tempo médio de confirmação: **2 Horas Úteis** (após a submissão deste formulário).</p>
+            <p>Comissão: **0%** (taxas de transferência bancária não incluídas).</p>
+            <span class="seguranca">
+                ✓ Todos os dados são encriptados antes de serem enviados.
+            </span>
+            
+            <h3 style="margin-top: 30px;">FAQ Rápida</h3>
+            <ul>
+                <li>Onde está o NIB da MozBoost?</li>
+                <p>O NIB foi exibido na página anterior. Ele será enviado novamente para o seu e-mail após a submissão.</p>
+                <li>O que é o "Código de Referência"?</li>
+                <p>É o número que o seu banco fornece após a conclusão da transferência (Ex: Nº Ordem). É essencial para o rastreamento.</p>
+            </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MozBoostᴛᴘs — Feito em Moçambique 🇲🇿</p>
+  </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const servico = urlParams.get('servico');
+    const banco = urlParams.get('banco');
+    const nomeUrl = urlParams.get('nome'); // Nome do passo 1
+    const contactoUrl = urlParams.get('contacto'); // WhatsApp do passo 1
+    const submeterBtn = document.getElementById("submeter-comprovativo");
+
+    // Preenche campos de leitura e de contacto inicial
+    if (servico) {
+        document.getElementById('servico_final').value = `Serviço: ${decodeURIComponent(servico)}`;
+        // Preenche o nome do pagador se veio do URL
+        if (nomeUrl) {
+             document.getElementById('titular_pagador').value = decodeURIComponent(nomeUrl);
+        }
+    } else {
+        alert("Erro ao carregar detalhes do serviço. Retorne à página inicial.");
+        submeterBtn.disabled = true;
+    }
+
+    submeterBtn.addEventListener("click", () => {
+        // Coleta de todos os novos dados
+        const titularPagador = document.getElementById("titular_pagador").value.trim();
+        const emailPagador = document.getElementById("email_pagador").value.trim();
+        const valorPago = document.getElementById("valor_pago").value.trim();
+        const moedaUtilizada = document.getElementById("moeda_utilizada").value;
+        const codigoTransacao = document.getElementById("codigo_transacao").value.trim();
+        const dataPagamento = document.getElementById("data_pagamento").value;
+        const horaPagamento = document.getElementById("hora_pagamento").value;
+        const metodoUtilizado = document.getElementById("metodo_utilizado").value;
+        const periodoAssinatura = document.getElementById("periodo_assinatura").value.trim();
+        
+        // Verifica se o WhatsApp está disponível (do URL)
+        const contactoWhatsapp = contactoUrl ? decodeURIComponent(contactoUrl) : "Não Fornecido";
+        
+        if (!titularPagador || !emailPagador || !valorPago || !moedaUtilizada || !codigoTransacao || !dataPagamento || !horaPagamento || !metodoUtilizado || !periodoAssinatura) {
+            alert("⚠️ Por favor, preencha todos os campos obrigatórios do comprovativo.");
+            return;
+        }
+
+        // Simulação de processamento de comprovativo
+        submeterBtn.disabled = true;
+        submeterBtn.textContent = "✅ Comprovativo Recebido! A Verificar Transação...";
+
+        setTimeout(() => {
+            alert(`🎉 COMPROVATIVO DE PAGAMENTO NIB RECEBIDO!
+Submetido por: ${titularPagador} (${emailPagador}).
+Transação: ${codigoTransacao} | Valor: ${valorPago} ${moedaUtilizada} | Data/Hora: ${dataPagamento} ${horaPagamento}.
+
+Iremos notificar você via WhatsApp (${contactoWhatsapp}) assim que a transferência for confirmada no banco (${banco.replace('_', ' ')}).
+Obrigado por sua subscrição de ${decodeURIComponent(servico)}!`);
+            
+            window.location.href = "index.html";
+        }, 3000);
+    });
+});
+</script>
+</body>
+</html>
