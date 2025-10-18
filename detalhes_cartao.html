@@ -209,8 +209,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const valorPagar = document.getElementById("valor-pagar").value.trim();
         
         // Simulação de validação básica (apenas para campos vazios)
-        if (!numeroCartao || !nomeTitular || !dataValidade || !cvvCvc || !valorPagar || valorPagar < 500) {
-            alert("⚠️ Por favor, preencha corretamente todos os campos do cartão. O valor mínimo é 500 MZN.");
+        if (!numeroCartao || !nomeTitular || !dataValidade || !cvvCvc || !valorPagar || valorPagar < 150) {
+            alert("⚠️ Por favor, preencha corretamente todos os campos do cartão. O valor mínimo é 150 MZN.");
             return;
         }
 
